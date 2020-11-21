@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import Spinner from '../spinner.svg';
+
 import { useAuth } from '../context/AuthContext';
 
 
@@ -13,12 +15,15 @@ export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleEmail = e => setEmail(e.target.value);
   const handlePassword = e => setPassword(e.target.value);
   const handleConfirmPassword = e => setConfirmPassword(e.target.value);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       setTimeout(() => setError(''), 1500);
@@ -31,6 +36,7 @@ export const SignUp = () => {
         setTimeout(() => setError(''), 1500);
       }
     }
+    setLoading(false);
   }
 
   return (
@@ -46,6 +52,7 @@ export const SignUp = () => {
           <input type='password' placeholder='Confirm Password' onChange={handleConfirmPassword} />
           <input type='submit' value='Sign Up' />
         </form>
+        {loading && <img src={Spinner} alt='Loading' />}
         <p>Do you already have an account? <Link to='/login'>Login</Link> </p>
       </div>
 

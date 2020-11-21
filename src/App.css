@@ -49,6 +49,7 @@ input[type='submit'] {
   margin: 10px 0;
   background-color: rgba(255, 0, 0, 0.658);
   color: white;
+  font-size: bolder;
 }
 
 .user-photo {
