@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
@@ -8,11 +8,7 @@ export const Home = () => {
   const history = useHistory();
 
   const [error, setError] = useState('');
-  const [userEmail, setUserEmail] = useState('');
 
-  useEffect(() => {
-    setUserEmail(currentUser.email);
-  }, [])
 
   const handleLogout = async () => {
     try {
@@ -30,7 +26,7 @@ export const Home = () => {
       </div>
       <div className='card-body'>
         <h1>Welcome</h1>
-        <p>{userEmail}</p>
+        <p>{currentUser.email}</p>
         <button className='logout-button' onClick={handleLogout} >Log Out</button>
       </div>
 
